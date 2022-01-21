@@ -6,6 +6,8 @@ package DAO;
 
 import Entidad.Profesor;
 import java.util.List;
+import java.sql.*;
+import java.util.ArrayList;
 
 /**
  *
@@ -15,7 +17,22 @@ public class DAOProfesorImp extends Conexion implements DAOProfesor {
 
     @Override
     public void Registrar(Profesor sideral) throws Exception {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        try{
+            this.conectar();
+            PreparedStatement st = this.conexion.prepareStatement("INSERT INTO Profesores VALUES(?,?,?,?,?,?,?)");
+            st.setInt(1,sideral.getCodigo_profesor());
+            st.setString(2,sideral.getNombre_profesor());
+            st.setInt(3, sideral.getEdad());
+            st.setInt(4, sideral.getTelefono());
+            st.setString(5, sideral.getCorreo());
+            st.setInt(6, sideral.getCurso_01());
+            st.setInt(7, sideral.getCurso_02());
+            st.executeUpdate();
+        } catch (Exception e){
+            throw e;
+        }finally{
+            this.desconectar();
+        }
     }
 
     @Override
@@ -30,7 +47,35 @@ public class DAOProfesorImp extends Conexion implements DAOProfesor {
 
     @Override
     public List<Profesor> listar() throws Exception {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        List<Profesor> lista = null;
+        try{
+            this.conectar();
+            PreparedStatement st = this.conexion.prepareStatement("select * from Profesores");
+            
+            lista = new ArrayList();
+            ResultSet rs = st.executeQuery();
+            while(rs.next()){
+                Profesor prof = new Profesor();
+                prof.setCodigo_profesor(rs.getInt("codigo_profesor"));
+                prof.setNombre_profesor(rs.getString("nombre_profesor"));
+                prof.setEdad(rs.getInt("edad"));
+                prof.setTelefono(rs.getInt("telefono"));
+                prof.setCorreo(rs.getString("correo"));
+                prof.setCurso_01(rs.getInt("curso_01"));
+                prof.setCurso_02(rs.getInt("curso_02"));
+                lista.add(prof);
+            }
+            rs.close();
+            st.close();
+            
+        }catch (Exception e){
+            throw e;
+            
+        } finally {
+            this.desconectar();
+        }
+        return lista;
+//throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
 }

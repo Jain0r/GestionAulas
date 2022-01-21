@@ -14,7 +14,7 @@ import java.sql.SQLException;
 public class Conexion {
     protected Connection conexion;
     
-    private final String Driver = "com.mysql.jdbc.Driver";
+    private final String Driver = "com.mysql.cj.jdbc.Driver";
     private final String DB_URL ="jdbc:mysql://localhost:3306/gestionaulas";
     
     private final String USER = "root";

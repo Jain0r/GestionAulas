@@ -18,6 +18,7 @@ public class Profesor {
     private int curso_01;
     private int curso_02;
     
+    public Profesor(){};
     public Profesor(int cod, String nm, int edad, int tel, String correo, int c1, int c2){
         super();
         this.codigo_profesor = cod;
