@@ -7,6 +7,7 @@ package GestionProfesor;
 import DAO.DAOProfesor;
 import DAO.DAOProfesorImp;
 import Entidad.Profesor;
+import java.util.Collections;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
@@ -19,6 +20,7 @@ import javax.swing.table.TableModel;
  */
 public class Profesor_Frame extends javax.swing.JFrame {
     DefaultTableModel modelo;
+    List<Profesor> listaProfes;
     //SINGLETON
     static private Profesor_Frame instancia = null;    
     static public Profesor_Frame Instanciar(){
@@ -34,7 +36,7 @@ public class Profesor_Frame extends javax.swing.JFrame {
      */
     public Profesor_Frame(){
         initComponents();
-        findAll();
+        actualizarTabla();
     }
     
 
@@ -67,6 +69,9 @@ public class Profesor_Frame extends javax.swing.JFrame {
         jLabel8 = new javax.swing.JLabel();
         jButton2 = new javax.swing.JButton();
         btnModificar = new javax.swing.JButton();
+        btnOrdenXcod = new javax.swing.JButton();
+        btnOrdenXedad = new javax.swing.JButton();
+        jButton5 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -151,6 +156,20 @@ public class Profesor_Frame extends javax.swing.JFrame {
             }
         });
 
+        btnOrdenXcod.setText("Ordernar Por Codigo");
+        btnOrdenXcod.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnOrdenXcodMouseClicked(evt);
+            }
+        });
+
+        btnOrdenXedad.setText("Ordenar por Edad");
+        btnOrdenXedad.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnOrdenXedadMouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -178,12 +197,18 @@ public class Profesor_Frame extends javax.swing.JFrame {
                                 .addGap(18, 18, 18)
                                 .addComponent(txtCurso1, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addContainerGap()
+                        .addComponent(jButton1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(196, 196, 196)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btnModificar)
                             .addComponent(jButton2)
-                            .addComponent(jButton1))))
+                            .addComponent(btnOrdenXcod)
+                            .addComponent(btnOrdenXedad)
+                            .addComponent(jButton5))
+                        .addGap(1, 1, 1)))
                 .addGap(19, 19, 19))
             .addGroup(layout.createSequentialGroup()
                 .addGap(24, 24, 24)
@@ -200,21 +225,18 @@ public class Profesor_Frame extends javax.swing.JFrame {
                         .addComponent(jLabel6)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(txtCorreo, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnModificar)
-                .addGap(26, 26, 26))
+                .addGap(26, 494, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jLabel1))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(22, 22, 22)
-                        .addComponent(jButton1)))
-                .addGap(24, 24, 24)
+                    .addComponent(jLabel1)
+                    .addComponent(jButton1))
+                .addGap(18, 18, 18)
+                .addComponent(btnModificar)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(txtCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -227,12 +249,13 @@ public class Profesor_Frame extends javax.swing.JFrame {
                     .addComponent(jLabel5)
                     .addComponent(txtTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel4)
-                    .addComponent(btnModificar))
-                .addGap(29, 29, 29)
+                    .addComponent(btnOrdenXcod))
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtCorreo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel6))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
+                    .addComponent(jLabel6)
+                    .addComponent(btnOrdenXedad))
+                .addGap(18, 18, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel7)
@@ -242,7 +265,9 @@ public class Profesor_Frame extends javax.swing.JFrame {
                             .addComponent(txtCurso2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(29, 29, 29)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(txtCurso1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(txtCurso1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jButton5)))
                 .addGap(40, 40, 40))
         );
 
@@ -257,7 +282,7 @@ public class Profesor_Frame extends javax.swing.JFrame {
         // TODO add your handling code here:    
         //Object[] fila = {6, "RAAAAA", 24, 123123, "asdasd", 1, 2};
         //modelo.addRow(fila);
-        findAll();
+        actualizarTabla();
     }//GEN-LAST:event_jButton1MouseClicked
 
     private void txtCodigoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCodigoActionPerformed
@@ -300,7 +325,7 @@ public class Profesor_Frame extends javax.swing.JFrame {
             
         }
         
-        findAll();
+        actualizarTabla();
     }//GEN-LAST:event_btnModificarMouseClicked
 
     private void jButton2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MouseClicked
@@ -315,8 +340,48 @@ public class Profesor_Frame extends javax.swing.JFrame {
             
         }
         
-        findAll();
+        actualizarTabla();
     }//GEN-LAST:event_jButton2MouseClicked
+
+    private void btnOrdenXedadMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnOrdenXedadMouseClicked
+        limpiarTabla(grdProfesores);
+        Profesor aea = new Profesor();
+        for (;;) {
+            char flag = 0;
+            for (int i = 0; i < listaProfes.size() - 1; i++) {
+                if (listaProfes.get(i).getEdad() > listaProfes.get(i + 1).getEdad()) {
+                    aea = listaProfes.get(i);
+                    listaProfes.set(i, listaProfes.get(i + 1));
+                    listaProfes.set(i + 1, aea);
+                    flag = 1;
+                }
+            }
+            if (flag == 0) {
+                break;
+            }
+        }
+        listar(listaProfes);
+    }//GEN-LAST:event_btnOrdenXedadMouseClicked
+
+    private void btnOrdenXcodMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnOrdenXcodMouseClicked
+        limpiarTabla(grdProfesores);
+        Profesor aea = new Profesor();
+        for (;;) {
+            char flag = 0;
+            for (int i = 0; i < listaProfes.size() - 1; i++) {
+                if (listaProfes.get(i).getCodigo_profesor() > listaProfes.get(i + 1).getCodigo_profesor()) {
+                    aea = listaProfes.get(i);
+                    listaProfes.set(i, listaProfes.get(i + 1));
+                    listaProfes.set(i + 1, aea);
+                    flag = 1;
+                }
+            }
+            if (flag == 0) {
+                break;
+            }
+        }
+        listar(listaProfes);
+    }//GEN-LAST:event_btnOrdenXcodMouseClicked
 
     /**
      * @param args the command line arguments
@@ -353,14 +418,17 @@ public class Profesor_Frame extends javax.swing.JFrame {
         });
     }
     
-    protected void findAll(){
+    protected void actualizarTabla(){
         limpiarTabla(grdProfesores);
         DAOProfesor dao = new DAOProfesorImp();
-        List<Profesor> listaProfes;
+        
         
         try{
-            listaProfes = dao.listar();
-            modelo = (DefaultTableModel) grdProfesores.getModel();
+            listaProfes = (dao.listar());
+            listar(listaProfes);
+            /**/
+            
+            /*modelo = (DefaultTableModel) grdProfesores.getModel();
             Object[] fila = new Object[modelo.getColumnCount()];
             for(int i = 0; i < listaProfes.size(); i++){
                 fila[0] = listaProfes.get(i).getCodigo_profesor();
@@ -371,11 +439,13 @@ public class Profesor_Frame extends javax.swing.JFrame {
                 fila[5] = listaProfes.get(i).getCurso_01();
                 fila[6] = listaProfes.get(i).getCurso_02();
                 modelo.addRow(fila);
-            }
+            }*/
         }catch (Exception e){
             System.out.println(e.getMessage());
         }
     }
+    
+    
     
     public void limpiarTabla(JTable tabla){
         try {
@@ -388,12 +458,32 @@ public class Profesor_Frame extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Error al limpiar la tabla.");
         }
     }
+    
+    
+    
+    private void listar(List<Profesor> registros){
+        modelo = (DefaultTableModel) grdProfesores.getModel();
+            Object[] fila = new Object[modelo.getColumnCount()];
+            for(int i = 0; i < registros.size(); i++){
+                fila[0] = registros.get(i).getCodigo_profesor();
+                fila[1] = registros.get(i).getNombre_profesor();
+                fila[2] = registros.get(i).getEdad();
+                fila[3] = registros.get(i).getTelefono();
+                fila[4] = registros.get(i).getCorreo();
+                fila[5] = registros.get(i).getCurso_01();
+                fila[6] = registros.get(i).getCurso_02();
+                modelo.addRow(fila);
+            }
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnModificar;
+    private javax.swing.JButton btnOrdenXcod;
+    private javax.swing.JButton btnOrdenXedad;
     private javax.swing.JTable grdProfesores;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton5;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

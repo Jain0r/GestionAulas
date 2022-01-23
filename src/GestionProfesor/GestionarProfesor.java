@@ -25,7 +25,7 @@ public class GestionarProfesor {
         Profesor_Frame form;
         form = Profesor_Frame.Instanciar();
         
-        //form.setVisible(true); 
+        form.setVisible(true); 
         System.out.println("GRAEACK");
         //Profesor_Frame form;
         Profesor prof = new Profesor();
@@ -51,8 +51,8 @@ public class GestionarProfesor {
                 }
             });
             
-            form = new Profesor_Frame();
-            form.setVisible(true);
+            //form = new Profesor_Frame();
+            //form.setVisible(true);
             
         }catch (Exception e){
             System.out.println(e.getMessage());
