@@ -37,14 +37,36 @@ public class DAOProfesorImp extends Conexion implements DAOProfesor {
 
     @Override
     public void Modificar(Profesor sideral) throws Exception {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        try{
+            this.conectar();
+            PreparedStatement st = this.conexion.prepareStatement("UPDATE profesores set nombre_profesor = ?, edad = ?, telefono = ?, correo = ?, curso_01 = ?, curso_02 = ? WHERE codigo_profesor = ?");
+            st.setString(1,sideral.getNombre_profesor());
+            st.setInt(2,sideral.getEdad());
+            st.setInt(3,sideral.getTelefono());
+            st.setString(4,sideral.getCorreo());
+            st.setInt(5,sideral.getCurso_01());
+            st.setInt(6,sideral.getCurso_02());
+            st.setInt(7,sideral.getCodigo_profesor());
+            st.executeUpdate();
+        }catch (Exception e){
+            
+        }
     }
 
     @Override
     public void Eliminar(Profesor sideral) throws Exception {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        try{
+            this.conectar();
+            PreparedStatement st = this.conexion.prepareStatement("DELETE from profesores where codigo_profesor = ?");
+            st.setInt(1, sideral.getCodigo_profesor());
+            st.executeUpdate();
+        } catch (Exception e) {
+
+        }
+
     }
 
+    
     @Override
     public List<Profesor> listar() throws Exception {
         List<Profesor> lista = null;

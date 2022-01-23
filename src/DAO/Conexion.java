@@ -18,7 +18,7 @@ public class Conexion {
     private final String DB_URL ="jdbc:mysql://localhost:3306/gestionaulas";
     
     private final String USER = "root";
-    private final String PASS = "oracle";
+    private final String PASS = "root";
     
     public void conectar() throws Exception{
         try{
