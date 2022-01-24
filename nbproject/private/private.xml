@@ -3,12 +3,12 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/quaz_/Documents/NetBeansProjects/GestionAulas/src/GestionProfesor/Profesor_Frame.java</file>
-            <file>file:/C:/Users/quaz_/Documents/NetBeansProjects/GestionAulas/src/DAO/Conexion.java</file>
-            <file>file:/C:/Users/quaz_/Documents/NetBeansProjects/GestionAulas/src/DAO/DAOProfesorImp.java</file>
-            <file>file:/C:/Users/quaz_/Documents/NetBeansProjects/GestionAulas/src/DAO/DAOProfesor.java</file>
-            <file>file:/C:/Users/quaz_/Documents/NetBeansProjects/GestionAulas/src/Entidad/Profesor.java</file>
-            <file>file:/C:/Users/quaz_/Documents/NetBeansProjects/GestionAulas/src/GestionProfesor/GestionarProfesor.java</file>
+            <file>file:/C:/Users/sistemas10/Documents/NetBeansProjects/JavaApplication1/src/GestionProfesor/GestionarProfesor.java</file>
+            <file>file:/C:/Users/sistemas10/Documents/NetBeansProjects/JavaApplication1/src/DAO/Conexion.java</file>
+            <file>file:/C:/Users/sistemas10/Documents/NetBeansProjects/JavaApplication1/src/Entidad/Profesor.java</file>
+            <file>file:/C:/Users/sistemas10/Documents/NetBeansProjects/JavaApplication1/src/DAO/DAOProfesor.java</file>
+            <file>file:/C:/Users/sistemas10/Documents/NetBeansProjects/JavaApplication1/src/DAO/DAOProfesorImp.java</file>
+            <file>file:/C:/Users/sistemas10/Documents/NetBeansProjects/JavaApplication1/src/GestionProfesor/Profesor_Frame.java</file>
         </group>
     </open-files>
 </project-private>

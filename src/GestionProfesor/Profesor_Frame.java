@@ -26,7 +26,6 @@ public class Profesor_Frame extends javax.swing.JFrame {
     static public Profesor_Frame Instanciar(){
         if(instancia == null )
             instancia = new Profesor_Frame();
-        System.out.println("ya tenemos esa instancia loco, safa no ma");
         return instancia;
     }
     //****//
@@ -36,7 +35,12 @@ public class Profesor_Frame extends javax.swing.JFrame {
      */
     public Profesor_Frame(){
         initComponents();
-        actualizarTabla();
+        actualizarTabla(true);
+        DAOProfesor dao = new DAOProfesorImp();
+
+        try{
+            listaProfes = (dao.listar());
+        }catch (Exception e){};
     }
     
 
@@ -52,7 +56,7 @@ public class Profesor_Frame extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         grdProfesores = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        btnActualizar = new javax.swing.JButton();
         txtCodigo = new javax.swing.JTextField();
         txtNombre = new javax.swing.JTextField();
         txtEdad = new javax.swing.JTextField();
@@ -67,7 +71,7 @@ public class Profesor_Frame extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
-        jButton2 = new javax.swing.JButton();
+        btnEliminar = new javax.swing.JButton();
         btnModificar = new javax.swing.JButton();
         btnOrdenXcod = new javax.swing.JButton();
         btnOrdenXedad = new javax.swing.JButton();
@@ -98,7 +102,7 @@ public class Profesor_Frame extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(grdProfesores);
         if (grdProfesores.getColumnModel().getColumnCount() > 0) {
-            grdProfesores.getColumnModel().getColumn(0).setMaxWidth(20);
+            grdProfesores.getColumnModel().getColumn(0).setMaxWidth(30);
             grdProfesores.getColumnModel().getColumn(2).setMaxWidth(50);
             grdProfesores.getColumnModel().getColumn(3).setMaxWidth(100);
             grdProfesores.getColumnModel().getColumn(5).setMaxWidth(70);
@@ -109,15 +113,15 @@ public class Profesor_Frame extends javax.swing.JFrame {
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("GESTION DE DOCENTES");
 
-        jButton1.setText("Actualizar");
-        jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
+        btnActualizar.setText("Actualizar");
+        btnActualizar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jButton1MouseClicked(evt);
+                btnActualizarMouseClicked(evt);
             }
         });
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnActualizar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnActualizarActionPerformed(evt);
             }
         });
 
@@ -142,10 +146,10 @@ public class Profesor_Frame extends javax.swing.JFrame {
 
         jLabel8.setText("Curso 02:");
 
-        jButton2.setText("Eliminar");
-        jButton2.addMouseListener(new java.awt.event.MouseAdapter() {
+        btnEliminar.setText("Eliminar");
+        btnEliminar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jButton2MouseClicked(evt);
+                btnEliminarMouseClicked(evt);
             }
         });
 
@@ -198,13 +202,13 @@ public class Profesor_Frame extends javax.swing.JFrame {
                                 .addComponent(txtCurso1, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jButton1)
+                        .addComponent(btnActualizar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(196, 196, 196)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(btnModificar)
-                            .addComponent(jButton2)
+                            .addComponent(btnEliminar)
                             .addComponent(btnOrdenXcod)
                             .addComponent(btnOrdenXedad)
                             .addComponent(jButton5))
@@ -233,7 +237,7 @@ public class Profesor_Frame extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel1)
-                    .addComponent(jButton1))
+                    .addComponent(btnActualizar))
                 .addGap(18, 18, 18)
                 .addComponent(btnModificar)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -242,7 +246,7 @@ public class Profesor_Frame extends javax.swing.JFrame {
                     .addComponent(txtCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3)
                     .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton2))
+                    .addComponent(btnEliminar))
                 .addGap(19, 19, 19)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtEdad, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -274,16 +278,16 @@ public class Profesor_Frame extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void btnActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_btnActualizarActionPerformed
 
-    private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
+    private void btnActualizarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnActualizarMouseClicked
         // TODO add your handling code here:    
         //Object[] fila = {6, "RAAAAA", 24, 123123, "asdasd", 1, 2};
         //modelo.addRow(fila);
-        actualizarTabla();
-    }//GEN-LAST:event_jButton1MouseClicked
+        actualizarTabla(true);
+    }//GEN-LAST:event_btnActualizarMouseClicked
 
     private void txtCodigoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCodigoActionPerformed
         // TODO add your handling code here:
@@ -325,10 +329,10 @@ public class Profesor_Frame extends javax.swing.JFrame {
             
         }
         
-        actualizarTabla();
+        actualizarTabla(false);
     }//GEN-LAST:event_btnModificarMouseClicked
 
-    private void jButton2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MouseClicked
+    private void btnEliminarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEliminarMouseClicked
         Profesor registro = new Profesor();
         registro.setCodigo_profesor(Integer.parseInt(txtCodigo.getText()));
         
@@ -340,19 +344,17 @@ public class Profesor_Frame extends javax.swing.JFrame {
             
         }
         
-        actualizarTabla();
-    }//GEN-LAST:event_jButton2MouseClicked
+        actualizarTabla(false);
+    }//GEN-LAST:event_btnEliminarMouseClicked
 
     private void btnOrdenXedadMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnOrdenXedadMouseClicked
         limpiarTabla(grdProfesores);
-        Profesor aea = new Profesor();
         for (;;) {
             char flag = 0;
             for (int i = 0; i < listaProfes.size() - 1; i++) {
                 if (listaProfes.get(i).getEdad() > listaProfes.get(i + 1).getEdad()) {
-                    aea = listaProfes.get(i);
-                    listaProfes.set(i, listaProfes.get(i + 1));
-                    listaProfes.set(i + 1, aea);
+                    intercambiar(listaProfes, i, i+1);
+                    flag = 1;
                     flag = 1;
                 }
             }
@@ -365,14 +367,12 @@ public class Profesor_Frame extends javax.swing.JFrame {
 
     private void btnOrdenXcodMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnOrdenXcodMouseClicked
         limpiarTabla(grdProfesores);
-        Profesor aea = new Profesor();
+        //Profesor aea = new Profesor();
         for (;;) {
             char flag = 0;
             for (int i = 0; i < listaProfes.size() - 1; i++) {
                 if (listaProfes.get(i).getCodigo_profesor() > listaProfes.get(i + 1).getCodigo_profesor()) {
-                    aea = listaProfes.get(i);
-                    listaProfes.set(i, listaProfes.get(i + 1));
-                    listaProfes.set(i + 1, aea);
+                    intercambiar(listaProfes, i, i+1);
                     flag = 1;
                 }
             }
@@ -383,6 +383,12 @@ public class Profesor_Frame extends javax.swing.JFrame {
         listar(listaProfes);
     }//GEN-LAST:event_btnOrdenXcodMouseClicked
 
+    private void intercambiar(List<Profesor> registros, int i, int j ){
+        Profesor aea = new Profesor();
+        aea = listaProfes.get(i);
+        listaProfes.set(i, listaProfes.get(j));
+        listaProfes.set(j, aea);
+    }
     /**
      * @param args the command line arguments
      */
@@ -418,28 +424,19 @@ public class Profesor_Frame extends javax.swing.JFrame {
         });
     }
     
-    protected void actualizarTabla(){
+    protected void actualizarTabla(boolean flg){
         limpiarTabla(grdProfesores);
-        DAOProfesor dao = new DAOProfesorImp();
+        //DAOProfesor dao = new DAOProfesorImp();
         
         
         try{
-            listaProfes = (dao.listar());
-            listar(listaProfes);
-            /**/
+            if(flg){
+                DAOProfesor dao = new DAOProfesorImp();
+                listaProfes = (dao.listar());
+            }
             
-            /*modelo = (DefaultTableModel) grdProfesores.getModel();
-            Object[] fila = new Object[modelo.getColumnCount()];
-            for(int i = 0; i < listaProfes.size(); i++){
-                fila[0] = listaProfes.get(i).getCodigo_profesor();
-                fila[1] = listaProfes.get(i).getNombre_profesor();
-                fila[2] = listaProfes.get(i).getEdad();
-                fila[3] = listaProfes.get(i).getTelefono();
-                fila[4] = listaProfes.get(i).getCorreo();
-                fila[5] = listaProfes.get(i).getCurso_01();
-                fila[6] = listaProfes.get(i).getCurso_02();
-                modelo.addRow(fila);
-            }*/
+            listar(listaProfes);
+           
         }catch (Exception e){
             System.out.println(e.getMessage());
         }
@@ -477,12 +474,12 @@ public class Profesor_Frame extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnActualizar;
+    private javax.swing.JButton btnEliminar;
     private javax.swing.JButton btnModificar;
     private javax.swing.JButton btnOrdenXcod;
     private javax.swing.JButton btnOrdenXedad;
     private javax.swing.JTable grdProfesores;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton5;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
