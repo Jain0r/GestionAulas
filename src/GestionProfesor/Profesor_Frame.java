@@ -9,6 +9,7 @@ import DAO.DAOProfesorImp;
 import Entidad.Profesor;
 import java.util.Collections;
 import java.util.List;
+import java.util.Random;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
@@ -75,7 +76,6 @@ public class Profesor_Frame extends javax.swing.JFrame {
         btnModificar = new javax.swing.JButton();
         btnOrdenXcod = new javax.swing.JButton();
         btnOrdenXedad = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -179,41 +179,17 @@ public class Profesor_Frame extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(0, 30, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 741, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel2)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(txtCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(16, 16, 16)
-                                .addComponent(jLabel3)
-                                .addGap(18, 18, 18)
-                                .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 385, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel8)
-                                .addGap(18, 18, 18)
-                                .addComponent(txtCurso2, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel7)
-                                .addGap(18, 18, 18)
-                                .addComponent(txtCurso1, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(btnActualizar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(196, 196, 196)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btnModificar)
-                            .addComponent(btnEliminar)
-                            .addComponent(btnOrdenXcod)
-                            .addComponent(btnOrdenXedad)
-                            .addComponent(jButton5))
-                        .addGap(1, 1, 1)))
-                .addGap(19, 19, 19))
+                .addContainerGap()
+                .addComponent(btnActualizar)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(196, 196, 196)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnModificar)
+                    .addComponent(btnEliminar)
+                    .addComponent(btnOrdenXcod)
+                    .addComponent(btnOrdenXedad))
+                .addGap(20, 20, 20))
             .addGroup(layout.createSequentialGroup()
                 .addGap(24, 24, 24)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -230,6 +206,27 @@ public class Profesor_Frame extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(txtCorreo, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(26, 494, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 30, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 741, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(txtCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(16, 16, 16)
+                        .addComponent(jLabel3)
+                        .addGap(18, 18, 18)
+                        .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 385, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel8)
+                        .addGap(18, 18, 18)
+                        .addComponent(txtCurso2, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel7)
+                        .addGap(18, 18, 18)
+                        .addComponent(txtCurso1, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(19, 19, 19))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -266,13 +263,11 @@ public class Profesor_Frame extends javax.swing.JFrame {
                         .addGap(24, 24, 24)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel8)
-                            .addComponent(txtCurso2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(29, 29, 29)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(txtCurso1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jButton5)))
-                .addGap(40, 40, 40))
+                            .addComponent(txtCurso2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(txtCurso1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(33, 33, 33)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
         pack();
@@ -333,7 +328,7 @@ public class Profesor_Frame extends javax.swing.JFrame {
     }//GEN-LAST:event_btnModificarMouseClicked
 
     private void btnEliminarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEliminarMouseClicked
-        Profesor registro = new Profesor();
+        /*Profesor registro = new Profesor();
         registro.setCodigo_profesor(Integer.parseInt(txtCodigo.getText()));
         
         try{
@@ -342,11 +337,29 @@ public class Profesor_Frame extends javax.swing.JFrame {
             System.out.println("GRAEACK");
         }catch (Exception e){
             
-        }
-        
-        actualizarTabla(false);
+        }*/int eliminar;
+        eliminar = buscar(listaProfes, Integer.parseInt(txtCodigo.getText()));
+        listaProfes.remove(eliminar);
+        //actualizarTabla(false);
+        listar(listaProfes);
     }//GEN-LAST:event_btnEliminarMouseClicked
 
+    public static int buscar(List<Profesor> registro, int dato) {
+        int inicio = 0;
+        int fin = registro.size() - 1;
+        int pos;
+        while (inicio <= fin) {
+            pos = (inicio + fin) / 2;
+            if (registro.get(pos).getCodigo_profesor() == dato) {
+                return pos;
+            } else if (registro.get(pos).getCodigo_profesor() < dato) {
+                inicio = pos + 1;
+            } else {
+                fin = pos - 1;
+            }
+        }
+        return -1;
+    }
     private void btnOrdenXedadMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnOrdenXedadMouseClicked
         limpiarTabla(grdProfesores);
         for (;;) {
@@ -363,11 +376,16 @@ public class Profesor_Frame extends javax.swing.JFrame {
             }
         }
         listar(listaProfes);
+        
+         for(int i = 0; i< 10; i++){
+            System.out.println(listaProfes.get(i).getCodigo_profesor());
+        }
     }//GEN-LAST:event_btnOrdenXedadMouseClicked
 
     private void btnOrdenXcodMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnOrdenXcodMouseClicked
         limpiarTabla(grdProfesores);
-        //Profesor aea = new Profesor();
+        limpiarTabla(grdProfesores);
+        Profesor aea = new Profesor();
         for (;;) {
             char flag = 0;
             for (int i = 0; i < listaProfes.size() - 1; i++) {
@@ -381,13 +399,58 @@ public class Profesor_Frame extends javax.swing.JFrame {
             }
         }
         listar(listaProfes);
+       
     }//GEN-LAST:event_btnOrdenXcodMouseClicked
-
+/*
+    public void quicksort(List<Profesor> registro, int low, int high) {
+        if(low >= high) return;
+        
+        int pivotIdx = new Random().nextInt(high - low) + low;
+        int pivot = registro.get(pivotIdx).getCodigo_profesor();
+        intercambiar(registro, pivotIdx, high);
+        
+        int left = partition(registro, low, high, pivot);
+        
+        quicksort(registro, low, left -1);
+        quicksort(registro, left +1, high);
+        
+    }
+    
+    private int partition(List<Profesor> registro, int low, int high, int pivot){
+        int left = low;
+        int rigth = high -1;
+        while (left < rigth){
+            //System.out.println("graeack");
+            while((registro.get(left).getCodigo_profesor() <= pivot) && (left < rigth)){
+                left++;;
+            }
+            while((registro.get(rigth).getCodigo_profesor() <= pivot) && (left < rigth)){
+                rigth--;
+                System.out.println(rigth);
+            }
+            
+            intercambiar(registro, left, rigth);
+        }
+        
+        if(registro.get(left).getCodigo_profesor() > registro.get(high).getCodigo_profesor()){
+            intercambiar(registro, left, high);
+        }else{
+            left = high;
+        }
+        
+        return left;
+    }
+    */
     private void intercambiar(List<Profesor> registros, int i, int j ){
-        Profesor aea = new Profesor();
+        try{
+            Profesor aea = new Profesor();
         aea = listaProfes.get(i);
         listaProfes.set(i, listaProfes.get(j));
         listaProfes.set(j, aea);
+        } catch (Exception e) {
+            System.out.println(e);}
+        
+        
     }
     /**
      * @param args the command line arguments
@@ -459,6 +522,7 @@ public class Profesor_Frame extends javax.swing.JFrame {
     
     
     private void listar(List<Profesor> registros){
+        limpiarTabla(grdProfesores);
         modelo = (DefaultTableModel) grdProfesores.getModel();
             Object[] fila = new Object[modelo.getColumnCount()];
             for(int i = 0; i < registros.size(); i++){
@@ -480,7 +544,6 @@ public class Profesor_Frame extends javax.swing.JFrame {
     private javax.swing.JButton btnOrdenXcod;
     private javax.swing.JButton btnOrdenXedad;
     private javax.swing.JTable grdProfesores;
-    private javax.swing.JButton jButton5;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
